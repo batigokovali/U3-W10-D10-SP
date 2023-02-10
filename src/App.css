@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.first-header {
+  background-image: url("https://staticdelivery.nexusmods.com/images/110/4889843-1382145519.jpg");
+  background-position-y: -216px;
+background-repeat: no-repeat;
+}
+
+.header {
+  color:antiquewhite;
+  text-shadow: 0px 0px 15px #34C2CE;
+}

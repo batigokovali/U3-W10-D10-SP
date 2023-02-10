@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
+import MyLocation from "./MyLocation";
 
 const MySearch = () => {
   const [query, setQuery] = useState("");
+  const [locations, setLocation] = useState([])
 
   const url =
-    `api.openweathermap.org/data/2.5/weather?q=${query}&APPID=56db6901d4a5b12ceea085dbc13358d4`;
+    `https://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=56db6901d4a5b12ceea085dbc13358d4&units=metric`;
 
   const handleChange = (e) => {
     setQuery(e.target.value);
-    console.log(query)
   };
 
   const handleSubmit = async (e) => {
@@ -20,6 +21,7 @@ const MySearch = () => {
       if (response.ok) {
         const data = await response.json()
         console.log(data)
+        setLocation(data)
       } else {
         alert("Error fetching results");
       }
@@ -29,20 +31,29 @@ const MySearch = () => {
   };
 
   return (
-    <Container>
+    <Container fluid>
       <Row>
-        <Col xs={8} className="mr-auto my-3">
-          <h1>Search for a Location!</h1>
+        <Col className="mr-auto mb-5 jumbotron first-header">
+          <h1 className="header">Search for a Location!</h1>
+          <Row>
+            <Col xs={4} className="mx-auto px-0 mt-5">
+              <Form onSubmit={handleSubmit}>
+                <Form.Control
+                  type="search"
+                  value={query}
+                  onChange={handleChange}
+                  placeholder="Search and press Enter..."
+                  required
+                />
+              </Form>
+            </Col>
+          </Row>
         </Col>
-        <Col xs={12} className="mx-auto">
-          <Form onSubmit={handleSubmit}>
-            <Form.Control
-              type="search"
-              value={query}
-              onChange={handleChange}
-              placeholder="type and press Enter"
-            />
-          </Form>
+      </Row>
+      <Row>
+        <Col className="mt-5">{locations.length ? (<MyLocation data={locations}></MyLocation>) : (
+          <h2>There are no cities selected</h2>
+        )}
         </Col>
       </Row>
     </Container>

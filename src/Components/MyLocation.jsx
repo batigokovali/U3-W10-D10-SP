@@ -1,19 +1,16 @@
-import { Row } from "react-bootstrap";
-//import { Link } from "react-router-dom";
-//import { useSelector, useDispatch } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
+import { FaBeer } from 'react-icons/fa';
 
-const Location = ({ data, index }) => {
-    // const dispatch = useDispatch();
-    // let locations = useSelector((state) => state.locations.content);
+const MyLocation = (props) => {
 
     return (
-        <Row
-            className="mx-0 mt-3 p-3 d-flex align-items-center"
-            style={{ border: "1px solid #00000033", borderRadius: 4 }}
-        >
-            <p>Test</p>
-        </Row>
+        <Container>
+            <h1>{props.data.name}</h1>
+            <h1>Average Temp: {props.data.main.temp}</h1>
+            <h3>Feels Like: {props.data.main.feels_like}</h3>
+        </Container>
+
     );
 };
 
-export default Job;
+export default MyLocation;
