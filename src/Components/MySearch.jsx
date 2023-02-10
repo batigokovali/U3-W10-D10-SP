@@ -7,7 +7,7 @@ const MySearch = () => {
   const [locations, setLocation] = useState(null)
 
   const url =
-    `https://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=56db6901d4a5b12ceea085dbc13358d4&units=metric`;
+    `https://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=eeaa1c4b8d481e6b014d81c4dfe64c54&units=metric`;
 
   const handleChange = (e) => {
     setQuery(e.target.value);

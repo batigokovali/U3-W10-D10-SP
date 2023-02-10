@@ -1,7 +1,33 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { BsFillSunFill, BsCloudsFill, BsFillCloudRainFill, BsSnow2, BsFillCloudSunFill } from 'react-icons/bs'
+import { useState, useEffect } from "react";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 const MyLocation = (props) => {
+
+    const [forecast, setForecast] = useState("")
+
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${props.data.name}&APPID=eeaa1c4b8d481e6b014d81c4dfe64c54&units=metric`
+
+    const fetchForecast = async () => {
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json()
+                console.log(data)
+                setForecast(data)
+            } else {
+                alert("Error fetching results");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchForecast();
+    }, [props]);
 
     return (
         <Container className="display-weather py-5">
@@ -24,9 +50,29 @@ const MyLocation = (props) => {
                     <h3>Pressure: {props.data.main.pressure}hPa</h3>
                 </Col>
             </Row>
-        </Container>
+            <Row>
+                <Col>
+                    <h2>Forecast</h2>
+                </Col>
+            </Row>
+            <Row className="mt-5 mx-3 d-flex justify-content-center">
+                {forecast ? (
+                    forecast.list.map((forecastData) => (
+                        <Col xs={2} className="mb-3 mx-2 forecast">
+                            <p>{forecastData.dt_txt}</p>
+                            <p>{forecastData.main.temp}°C</p>
+                            <p>Min: {forecastData.main.temp_min} | Max: {forecastData.main.temp_max}</p>
+                        </Col>
+                    ))
+                ) : (<h1><Spinner animation="border" role="status">
+                    <span className="visually-hidden"></span>
+                </Spinner></h1>)}
 
-    );
+            </Row>
+
+        </Container>
+    )
 };
+
 
 export default MyLocation;
