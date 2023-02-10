@@ -18,7 +18,7 @@ const MySearch = () => {
     try {
       const response = await fetch(url);
       if (response.ok) {
-        const { data } = response.json()
+        const data = await response.json()
         console.log(data)
       } else {
         alert("Error fetching results");
