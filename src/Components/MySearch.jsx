@@ -7,10 +7,11 @@ const MySearch = () => {
   //const [location, setLocation] = useState([]);
 
   const baseEndpoint =
-    `api.openweathermap.org/data/2.5/weather?q${query}&=APPID=56db6901d4a5b12ceea085dbc13358d4`;
+    `api.openweathermap.org/data/2.5/weather?q=${query}&APPID=56db6901d4a5b12ceea085dbc13358d4`;
 
   const handleChange = (e) => {
     setQuery(e.target.value);
+    console.log(query)
   };
 
   const handleSubmit = async (e) => {
@@ -19,8 +20,8 @@ const MySearch = () => {
     try {
       const response = await fetch(baseEndpoint);
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
+        const data = await response.json()
+        console.log(data)
         //setLocation(data)
       } else {
         alert("Error fetching results");
