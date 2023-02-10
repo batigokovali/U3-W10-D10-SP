@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 const MySearch = () => {
   const [query, setQuery] = useState("");
-  //const [location, setLocation] = useState([]);
 
-  const baseEndpoint =
+  const url =
     `api.openweathermap.org/data/2.5/weather?q=${query}&APPID=56db6901d4a5b12ceea085dbc13358d4`;
 
   const handleChange = (e) => {
@@ -18,11 +16,10 @@ const MySearch = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(baseEndpoint);
+      const response = await fetch(url);
       if (response.ok) {
-        const data = await response.json()
+        const { data } = response.json()
         console.log(data)
-        //setLocation(data)
       } else {
         alert("Error fetching results");
       }

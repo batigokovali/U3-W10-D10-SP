@@ -23,7 +23,7 @@ const mainReducer = (state = initialState, action) => {
                 locations: {
                     ...state.locations,
                     content: state.locations.content.filter(
-                        (el, i) => i !== action.payload
+                        (el) => el !== action.payload
                     ),
                 },
             };

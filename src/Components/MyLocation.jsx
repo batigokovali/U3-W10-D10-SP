@@ -1,10 +1,10 @@
-import { Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { Row } from "react-bootstrap";
+//import { Link } from "react-router-dom";
+//import { useSelector, useDispatch } from "react-redux";
 
 const Location = ({ data, index }) => {
-    const dispatch = useDispatch();
-    let locations = useSelector((state) => state.locations.content);
+    // const dispatch = useDispatch();
+    // let locations = useSelector((state) => state.locations.content);
 
     return (
         <Row
@@ -12,7 +12,6 @@ const Location = ({ data, index }) => {
             style={{ border: "1px solid #00000033", borderRadius: 4 }}
         >
             <p>Test</p>
-
         </Row>
     );
 };
