@@ -2,7 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { BsFillSunFill, BsCloudsFill, BsFillCloudRainFill, BsSnow2, BsFillCloudSunFill } from 'react-icons/bs'
 import { useState, useEffect } from "react";
 import Spinner from 'react-bootstrap/Spinner';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { parseISO, format } from 'date-fns'
 
 
 const MyLocation = (props) => {
@@ -59,12 +59,15 @@ const MyLocation = (props) => {
             <Row className="mt-5 mx-3 d-flex justify-content-center">
                 {forecast ? (
                     forecast.list.map((forecastData) => (
-                        <Col key={forecastData.dt_txt} xs={2} className="mb-3 mx-2 forecast">
-                            <p>{forecastData.dt_txt}</p>
-                            <p>{forecastData.main.temp}°C</p>
-                            <p>Min: {forecastData.main.temp_min}</p>
-                            <p>Max: {forecastData.main.temp_max}</p>
-                        </Col>
+                        <>
+                            <Col key={forecastData.dt_txt} xs={2} className="mb-3 mx-2 forecast">
+                                <p>{format(parseISO(forecastData.dt_txt), "EEEE, MMMM do p")}</p>
+                                <p>{forecastData.main.temp}°C</p>
+                                <p>Min: {forecastData.main.temp_min}</p>
+                                <p>Max: {forecastData.main.temp_max}</p>
+                            </Col>
+
+                        </>
                     ))
                 ) : (<h1><Spinner animation="border" role="status">
                     <span className="visually-hidden"></span>
